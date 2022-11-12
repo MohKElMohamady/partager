@@ -1,0 +1,36 @@
+syntax = "proto3";
+package partage;
+import "entities.proto";
+option java_multiple_files = true;
+option java_package = "io.icarus7.partage";
+option java_outer_classname = "VoyageProto";
+
+
+service VoyagesService {
+  rpc AddANewVoyage(AddNewVoyageRequest) returns (Voyage);
+  rpc GetAllVoyages(GetAllVoyagesRequest) returns (stream Voyage);
+  rpc GetOpenVoyages(GetOpenVoyagesRequest) returns (stream Voyage);
+  rpc GetUsersVoyages(GetUsersVoyagesRequest) returns (stream Voyage);
+  rpc SearchForVoyageWithOriginDestinationAndDate(SearchForVoyageRequest) returns (stream Voyage);
+  rpc DeleteVoyage(DeleteVoyageRequest) returns (Voyage);
+}
+
+message GetAllVoyagesRequest{}
+
+message AddNewVoyageRequest{
+  string origin = 1;
+  string destination = 2;
+  int32 maximumCapacity = 3;
+  double tripCost = 5;
+  string description = 6;
+  int64 departure = 7;
+  VehicleType vehicleType = 8;
+}
+
+message GetOpenVoyagesRequest {}
+
+message GetUsersVoyagesRequest {}
+
+message DeleteVoyageRequest {}
+
+message SearchForVoyageRequest {}

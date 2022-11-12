@@ -1,0 +1,30 @@
+syntax = "proto3";
+package partage;
+import "entities.proto";
+option java_multiple_files = true;
+option java_package = "io.icarus7.partage";
+option java_outer_classname = "ReservationProto";
+
+
+service ReservationService {
+  rpc Reserve(ReserveATripRequest) returns (Reservation);
+  rpc UpdateReservation(UpdateReservationRequest) returns (Reservation);
+  rpc DeleteReservation(DeleteReservationRequest) returns (Reservation);
+}
+
+message ReserveATripRequest {
+  string bookerId = 1;
+  string tripId = 2;
+  int32 numberOfSeats = 3;
+}
+
+message UpdateReservationRequest {
+  string bookerId = 1;
+  string tripId = 2;
+  int32 numberOfSeats = 3;
+}
+
+message DeleteReservationRequest {
+  string bookerId = 1;
+  string tripId = 2;
+}

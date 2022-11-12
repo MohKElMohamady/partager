@@ -1,0 +1,67 @@
+syntax = "proto3";
+package partage;
+option java_multiple_files = true;
+option java_package = "io.icarus7.partage";
+option java_outer_classname = "EntitiesProto";
+
+message Reservation {
+  string reservationId = 1;
+  int32 reservedSeats = 2;
+  Voyage voyage = 3;
+  User bookedBy = 4;
+}
+
+message Voyage {
+  string voyageId = 1;
+  string description = 2;
+  double cost = 3;
+  string origin = 4;
+  string destination = 5;
+  int64 departure = 6;
+  int32 maximumCapacity = 7;
+  TripStatus status = 8;
+  Vehicle vehicle = 9;
+  repeated Reservation reservation = 10;
+  User createdBy = 11;
+}
+
+enum TripStatus {
+  Open = 0;
+  Closed = 1;
+}
+
+message Vehicle {
+  string vehicleId = 1;
+  string name = 2;
+  VehicleType vehicleType = 3;
+  repeated Vehicle vehicle = 4;
+}
+
+enum VehicleType {
+  E_Car = 0;
+  E_Bus = 1;
+  E_Van = 2;
+}
+
+message User {
+  string userId = 1;
+  string email = 2;
+  string firstName = 3;
+  string lastName = 4;
+  optional DrivingLicense license = 5;
+}
+
+message DrivingLicense {
+  User licenseOwner = 1;
+  string drivingLicenseId = 2;
+  int64 expirationDate = 3;
+}
+
+message Evaluation {
+  string evaluationId = 1;
+  string text = 2;
+  int64 writtenOn = 3;
+  uint32 rating = 4;
+  Voyage ratedTrip = 5;
+  User writtenBy = 6;
+}

@@ -1,0 +1,27 @@
+syntax = "proto3";
+import "entities.proto";
+import "google/protobuf/wrappers.proto";
+package partage;
+option java_multiple_files = true;
+option java_package = "io.icarus7.partage";
+option java_outer_classname = "NotationProto";
+
+
+service EvaluationService {
+  rpc EvaluateATrip(CreateEvaluationRequest) returns (Evaluation);
+  rpc GetAllEvaluationsOfAVoyage(google.protobuf.StringValue) returns (stream Evaluation);
+  rpc AverageEvaluationsOfAVoyage(Voyage) returns (google.protobuf.DoubleValue);
+}
+
+message CreateEvaluationRequest {
+  string text = 1;
+  uint32 rating = 2;
+  Voyage ratedTrip = 3;
+  User writtenBy = 4;
+}
+
+message VoyageAndItsAverageRating {
+  Voyage voyage = 1;
+  double averageRating = 2;
+}
+
